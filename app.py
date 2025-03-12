@@ -2,17 +2,28 @@ import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from dotenv import load_dotenv
+from llama_index.llms.gemini import Gemini
+from llama_index.core import Settings
+from llama_index.core.agent import ReActAgent
 
 load_dotenv()
 
 TOKEN=os.getenv("TELEGRAM_BOT")
+GEMINI_KEY = os.getenv("GEMINI_KEY")
+
+llm = Gemini(
+    model="models/gemini-1.5-flash",
+    api_key=GEMINI_KEY
+)
+Settings.llm = llm
 
 async def start(update:Update,context:ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Hello! I'm your bot. How can I help you today?")
 
 # Define a handler for echoing text messages
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(update.message.text)
+    response = llm.complete(update.message.text)
+    await update.message.reply_text(response.text)
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("This is a help message!")
