@@ -6,6 +6,8 @@ from llama_index.llms.gemini import Gemini
 from llama_index.core import Settings
 from llama_index.core.agent import ReActAgent
 
+print("develop")
+
 load_dotenv()
 
 TOKEN=os.getenv("TELEGRAM_BOT")
