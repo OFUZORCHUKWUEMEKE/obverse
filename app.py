@@ -15,6 +15,7 @@ llm = Gemini(
     model="models/gemini-1.5-flash",
     api_key=GEMINI_KEY
 )
+
 Settings.llm = llm
 
 async def start(update:Update,context:ContextTypes.DEFAULT_TYPE):
