@@ -6,8 +6,6 @@ from llama_index.llms.gemini import Gemini
 from llama_index.core import Settings
 from llama_index.core.agent import ReActAgent
 
-print("develop")
-
 load_dotenv()
 
 TOKEN=os.getenv("TELEGRAM_BOT")
@@ -30,6 +28,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("This is a help message!")
+
+async def signup(update:Update,context:ContextTypes.DEFAULT_TYPE):
+    await print("Signup")
 
 # Define an error handler
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
